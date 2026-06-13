@@ -2,8 +2,6 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as L from 'leaflet';
-import 'leaflet-defaulticon-compatibility';
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import { Observable, Subscription, forkJoin, of } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
 
@@ -59,6 +57,7 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
+    this.configureDefaultMarkerIcons();
     this.initMap();
     this.loadAllData();
     this.loadTotalAreaProtected();
@@ -83,6 +82,16 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
     }).addTo(this.map);
 
     this.layerGroup = L.featureGroup().addTo(this.map);
+  }
+
+  private configureDefaultMarkerIcons(): void {
+    const iconOptions = {
+      iconRetinaUrl: 'assets/leaflet/marker-icon-2x.png',
+      iconUrl: 'assets/leaflet/marker-icon.png',
+      shadowUrl: 'assets/leaflet/marker-shadow.png'
+    };
+
+    L.Icon.Default.mergeOptions(iconOptions);
   }
 
   private loadAllData(): void {
