@@ -14,7 +14,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // Toutes les routes
-                        .allowedOrigins("http://localhost:4200") // Autorise Angular
+                        .allowedOrigins("https://dry-forest-mqsrjhjpq-voahary-s-projects.vercel.app/") // Autorise Angular
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
                         .allowedHeaders("*") // Tous les headers
                         .allowCredentials(true) // Autorise les cookies/auth
